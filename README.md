@@ -31,12 +31,22 @@ Global planners supported:
 
 > Note: PID‑Safe and LQR‑Safe are external tracker nodes bypassing Nav2 controller_server, with only laser‑based emergency braking (no native local obstacle avoidance).
 
+**Common Planners and Controllers**
+
+| Category | Number of Items | Includes |
+| --- | --- | --- |
+| Global Planners | 10 | NavFn, SmacPlanner2D, SmacPlannerHybrid, SmacPlannerLattice, Theta*, A*, Dijkstra, RRT/RRT*, PRM, D* Lite |
+| Local Controllers | 9 | DWB, MPPI, RPP, TEB, Graceful, Rotation Shim, PID, LQR, APF |
+| Path Smoothers | 3 | Simple, Constrained, Savitzky-Golay |
 
 \#### Python dependencies
 
 ```bash
 
 pip3 install -r requirements.txt
+sudo apt update
+sudo apt install ros-humble-nav2-mppi-controller
+
 
 ```
 
