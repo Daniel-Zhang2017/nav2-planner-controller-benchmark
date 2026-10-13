@@ -1,0 +1,18 @@
+# requirements.txt
+# For nav2‑planner‑controller‑benchmark
+# Post‑processing & plotting for navigation benchmark results
+# Install: pip3 install -r requirements.txt
+
+numpy>=1.24.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+scipy>=1.10.0
+
+# For angle wrapping, quaternion conversion (used in your python controller nodes)
+transforms3d>=0.4.1
+
+# optional: notebook for interactive analysis
+jupyter>=1.0.0
+
+# optional: export figures to pdf
+seaborn>=0.12.0
