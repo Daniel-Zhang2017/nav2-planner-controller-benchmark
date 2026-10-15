@@ -6,6 +6,30 @@
 
 **Nav2 Local Controller Automated Comparison Benchmark** — Gazebo simulation environment, identical map, identical scenarios, and identical velocity limits, automatically comparing 5 local controllers and generating a readable report.
 
+Notes for learning:
+
+1. `nav2 bringup_launch.py` 原生支持 launch 参数去关闭部分组件：
+支持的关键参数：
+
+- `launch_controller_server`：`true/false`
+- `launch_planner_server`
+- `launch_bt_navigator`
+- `launch_amcl`
+
+修改你代码里 `launch_arguments` 字典，增加 `launch_controller_server: 'false'`
+
+```bash
+#in robot_navigation2/launch/tracker_bringup.launch.py
+launch_arguments={
+    'map': map_yaml_path,
+    'use_sim_time': use_sim_time,
+    'params_file': nav2_param_path,
+    'launch_controller_server': 'false',   # 新增：关闭 controller_server
+    'launch_bt_navigator': 'false'         # 建议一并关掉bt_navigator，否则它会等待controller服务然后报错
+}.items(),
+
+```
+
 ## Controllers Under Test
 
 | Controller | Execution Mode | Plugin / Node |
