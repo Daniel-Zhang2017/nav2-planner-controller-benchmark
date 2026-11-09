@@ -53,11 +53,10 @@ Core metrics include: Success rate, travel time, travel distance, cross-track er
 
 ```text
 Gazebo ─► Nav2 (Switch Params per Controller) ─► Evaluator (Per Trial) ─► run.csv ─► Analyze ─► Summary + Plots
+```
 Quick Start (ROS2 Humble)
 1) Dependencies & Build
-Bash
-
-
+```Bash
 # Install required controller packages
 sudo apt install ros-humble-nav2-mppi-controller \
                  ros-humble-nav2-regulated-pure-pursuit-controller
@@ -67,19 +66,19 @@ pip3 install -r requirements.txt
 
 # Build workspace
 colcon build && source install/setup.bash
+```
 2) Run Full Benchmark
 Execute a full batch comparison (5 controllers × 5 scenarios × 3 trials, headless mode):
 
-Bash
-
+```Bash
 
 python3 scripts/run_benchmark.py --controllers mppi,dwb,rpp,pid_safe,lqr_safe --trials 3
+```
+
 Reports will be generated in results/run_*/analysis/ (containing summary.md and plots/*.png).
 
 3) Manual Debugging (Single Controller)
-Bash
-
-
+```Bash
 # Terminal 1: Launch Gazebo simulation
 ros2 launch robot_description gazebo_robot.launch.py
 
@@ -91,9 +90,11 @@ ros2 run nav2_controller_benchmark evaluator --ros-args \
     -p mode:=nav2 -p controller:=dwb -p scenario_id:=g1_detour -p trial:=0 \
     -p start_x:=0.0 -p start_y:=0.0 -p start_yaw:=0.0 \
     -p goal_x:=-8.0 -p goal_y:=-5.5 -p goal_yaw:=0.0 -p output_csv:=/tmp/run.csv
+```
 For tracker mode: Use ros2 launch robot_navigation2 tracker_bringup.launch.py tracker:=lqr_safe and set evaluator parameter -p mode:=tracker.
 
-Directory Structure
+#### Directory Structure
+
 scripts/ — Scenario generation, parameter generation, batch running, and analysis tools (see docs/CONTROLLER_BENCHMARK_GUIDE.md).
 
 src/robot_description/ — Robot URDF/Xacro model + custom_room.world.
@@ -104,12 +105,17 @@ src/nav2_controller_benchmark/ — Evaluator node, custom PID/LQR trackers, and 
 
 results/ — Run CSV logs and analysis artifacts (auto-generated).
 
-Python Dependencies
-Plaintext
-
+#### Python Dependencies
 
 numpy
 pandas
 matplotlib
 scipy
 pyyaml
+
+#### Related Projects
+- [wall_climb_force_compliance_robot](https://github.com/Daniel-Zhang2017/wall_climb_force_compliance_robot) — Control Algorithm Comparison (Wall-Following Force Control)-P, PID, Python-based CVXPY MPC, **Acados MPC**.
+  
+- [roarm_ws](https://github.com/Daniel-Zhang2017/roarm_ws) — real arm control and motion
+
+- [ros2-robotics-projects](https://github.com/Daniel-Zhang2017/ros2-robotics-projects) — autonomous mobile robots and robotic arms
